@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de VHS</title>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen py-10">
+    <div class="container mx-auto px-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Fitas VHS</h1>
+
+        <a href="/vhs/novo" class="inline-block mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Cadastrar nova fita</a>
+        <a href="/categorias/nova" class="inline-block mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Cadastrar nova categoria</a>
+        <a href="/categorias" class="inline-block mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Lista de categoria</a>
+
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <thead>
+                <tr class="bg-gray-200 text-gray-700">
+                    <th class="px-4 py-2 text-left">ID</th>
+                    <th class="px-4 py-2 text-left">Título</th>
+                    <th class="px-4 py-2 text-left">Imagem</th>
+                    <th class="px-4 py-2 text-left">Diretor</th>
+                    <th class="px-4 py-2 text-left">Categoria</th>
+                    <th class="px-4 py-2 text-left">Cadastro</th>
+                    <th class="px-4 py-2 text-left">Status</th>
+                    <th class="px-4 py-2 text-left">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="vhs : ${vhsList}" class="border-b last:border-none hover:bg-gray-50">
+                    <td class="px-4 py-2" th:text="${vhs.id}">ID</td>
+                    <td class="px-4 py-2" th:text="${vhs.title}">Título</td>
+                    <td>
+                        <img th:if="${vhs.imageUrl}" th:src="@{${vhs.imageUrl}}" width="60" />
+                    </td>
+                    <td class="px-4 py-2" th:text="${vhs.usuario?.nome}">Diretor</td>
+                    <td class="px-4 py-2" th:text="${vhs.category?.name}">Categoria</td>
+                    <td class="px-4 py-2" th:text="${vhs.registrationDate}">Data</td>
+                    <td class="px-4 py-2" th:text="${vhs.status}">Status</td>
+                    <td class="px-4 py-2">
+                        <a class="inline-block mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" th:href="@{'/vhs/editar/' + ${vhs.id}}">Editar</a> |
+                        <a class="inline-block mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" th:href="@{'/vhs/excluir/' + ${vhs.id}}"
+                        onclick="return confirm('Deseja realmente excluir esta fita?')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

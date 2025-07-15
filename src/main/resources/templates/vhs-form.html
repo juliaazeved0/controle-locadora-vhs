@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro de Fita VHS</title>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-lg">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center"
+            th:text="${#strings.isEmpty(vhs.id) ? 'Nova VHS' : 'Editar VHS'}"></h1>
+
+        <form th:action="@{/vhs/salvar}" method="post" th:object="${vhs}" class="space-y-4">
+            <input type="hidden" th:field="*{id}" />
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Título:</label>
+                <input type="text" th:field="*{title}" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">URL da Imagem:</label>
+                <input type="text" th:field="*{imageUrl}"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Categoria:</label>
+                <select th:field="*{category.id}" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                    <option th:each="cat : ${categorias}" th:value="${cat.id}" th:text="${cat.name}"></option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Status:</label>
+                <select th:field="*{status}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                    <option value="DISPONIVEL">Disponível</option>
+                    <option value="EMPRESTADA">Emprestada</option>
+                    <option value="INDISPONIVEL">Indisponível</option>
+                    <option value="ALUGADO">Alugado</option>
+                </select>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">Salvar</button>
+        </form>
+
+        <a href="/vhs" class="block text-center text-blue-500 mt-4 hover:underline">Voltar</a>
+    </div>
+</body>
+</html>

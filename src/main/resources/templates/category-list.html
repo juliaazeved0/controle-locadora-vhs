@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Categorias</title>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen py-10">
+    <div class="container mx-auto px-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Categorias</h1>
+
+        <a href="/categorias/nova" class="inline-block mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            Cadastrar nova categoria
+        </a>
+
+
+        <a href="/vhs" class="inline-block mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Voltar</a>
+
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="px-4 py-2 text-left text-gray-700">ID</th>
+                    <th class="px-4 py-2 text-left text-gray-700">Nome</th>
+                    <th class="px-4 py-2 text-left text-gray-700">Descrição</th>
+                    <th class="px-4 py-2 text-left text-gray-700">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cat : ${categorias}" class="border-b last:border-none">
+                    <td class="px-4 py-2 text-gray-700" th:text="${cat.id}">ID</td>
+                    <td class="px-4 py-2 text-gray-600" th:text="${cat.name}">Nome</td>
+                    <td class="px-4 py-2 text-gray-600" th:text="${cat.description}">Descrição</td>
+                    <td class="px-4 py-2">
+                        <a th:href="@{'/categorias/editar/' + ${cat.id}}" class="text-blue-500 hover:underline">Editar</a>
+                        <span class="mx-2 text-gray-400">|</span>
+                        <a th:href="@{'/categorias/excluir/' + ${cat.id}}"
+                           onclick="return confirm('Excluir categoria?')"
+                           class="text-red-500 hover:underline">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

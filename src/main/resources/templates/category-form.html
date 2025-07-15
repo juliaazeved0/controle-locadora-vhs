@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulário de Categoria</title>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center"
+            th:text="${#strings.isEmpty(categoria.id) ? 'Nova Categoria' : 'Editar Categoria'}"></h1>
+
+        <form th:action="@{/categorias/salvar}" method="post" th:object="${categoria}" class="space-y-4">
+            <input type="hidden" th:field="*{id}" />
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Nome:</label>
+                <input type="text" th:field="*{name}" required
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Descrição:</label>
+                <textarea th:field="*{description}" rows="3"
+                          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">Salvar</button>
+        </form>
+        <a href="/categorias" class="block text-center text-blue-500 mt-4 hover:underline">Voltar</a>
+    </div>
+</body>
+</html>
