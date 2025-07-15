@@ -10,7 +10,7 @@ O sistema tem como objetivo permitir o gerenciamento de uma coleção de fitas V
 
 ``git clone git@github.com:juliaazeved0/controle-locadora-vhs.git``
 
-2. Abra o projeto em sua IDE de preferência (como IntelliJ ou Eclipse).
+2. Abra o projeto em sua IDE de preferência.
 
 3. Configure o arquivo application.properties com seu banco de dados MySQL (usuário e senha):
    
